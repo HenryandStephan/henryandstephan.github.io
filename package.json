@@ -1,0 +1,16 @@
+{
+  "name": "rewrite-in-html-ugh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "save": "^2.4.0",
+    "three": "^0.129.0",
+    "three-obj-loader": "^1.1.3"
+  }
+}

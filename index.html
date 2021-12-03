@@ -1,0 +1,249 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Henry & Stephan Headspace</title>
+		<meta charset="utf-8">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="/style.css">
+		</head>
+<body>
+	<div class="container">
+		<div class="buttons">
+			<a href="http://www.henryandstephan.com" class="btn-1">Do not press</a></div>
+	</div>
+
+	<footer class="taskbar">
+	
+	  
+
+	  <div class="row" style="margin-right: 0px;">
+		<div class="col-8">
+			<a href="https://www.henryandstephan.com" class="btn start-button"><img src="/users-1.png" class="icon-16">Portfolio</a>
+			<a href="https://www.henryandstephan.com" class="btn start-button"><img src="/directory_folder_options-5.png" class="icon-16"> Email</a>
+		</div>
+	
+	</div>
+</footer>
+	<script type="module">
+			import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
+			import {OrbitControls} from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js';
+			import {OBJLoader} from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/OBJLoader.js';
+			import { EffectComposer } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/postprocessing/EffectComposer.js';
+			import { RenderPass } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/postprocessing/RenderPass.js';
+			import { UnrealBloomPass } from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/postprocessing/UnrealBloomPass.js'
+			let camera, controls, scene, renderer, stephan, henzo, starGeo, star,
+			composer;
+	
+			
+			scene = new THREE.Scene();
+		// const spaceTexture = new THREE.TextureLoader().load('spacen.jpg');
+		//  scene.background = spaceTexture;
+			scene.fog = new THREE.FogExp2 (0x000000, 0.02)
+			camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+			window.addEventListener('resize', () => {
+    		renderer.setSize(window.innerWidth,window.innerHeight)
+    		camera.aspect = window.innerWidth / window.innerHeight;
+    		camera.updateProjectionMatrix();})
+
+			renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+
+			controls = new OrbitControls( camera, renderer.domElement );
+
+			//controls.listenToKeyEvents( window );
+
+			controls.autoRotate = true;
+			controls.enableDamping = true;
+			controls.dampingFactor = 0.05;
+			controls.addEventListener() 
+				if (controls.AutoRotate)
+  controls.autoRotate = false;
+  controls.autoRotateSpeed = 1.2 ;
+			
+
+		
+
+			camera.position.z = -8;
+
+			const bloomLayer = new THREE.Layers();
+			bloomLayer.set( starGeo);
+
+			const params = {
+				exposure: 1,
+				bloomStrength: 10,
+				bloomThreshold: 0,
+				bloomRadius: 0,
+			};
+
+			const renderScene = new RenderPass( scene, camera );
+
+			const bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
+				bloomPass.threshold = params.bloomThreshold;
+				bloomPass.strength = params.bloomStrength;
+				bloomPass.radius = params.bloomRadius;
+
+				composer = new EffectComposer( renderer );
+				composer.addPass( renderScene );
+				composer.addPass( bloomPass );
+
+				function addStar() {
+    const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+    const material = new THREE.MeshStandardMaterial({
+        color: 0xffffff,
+        emissive: 0xffffff,
+        emissiveIntensity: 80,
+    });
+    const star = new THREE.Mesh(geometry, material);
+    const [x, y, z] = Array(3)
+        .fill()
+        .map(() => THREE.MathUtils.randFloatSpread(200));
+
+    star.position.set(x, y, z);
+    scene.add(star);
+}
+
+Array(600).fill().forEach(addStar);
+
+				
+	
+
+			const loader = new OBJLoader();
+
+// load a resource
+
+loader.load(
+	// resource URL
+	'scandy.obj',
+	// called when resource is loaded
+	function ( object ) {
+		stephan = object;
+		stephan.position.x = 2;
+        stephan.position.y = 0;
+        stephan.position.z = 0;
+		stephan.scale.set  (10,10,10);
+		scene.add( object );
+
+	},
+	loader.load(
+    'henzo.obj',
+    	// called when resource is loaded
+	function ( object2 ) {
+		henzo = object2;
+		henzo.name= 'HenzoMesh';
+		henzo.position.x = -2;
+        henzo.position.y = 0;
+        henzo.position.z = 0;
+		henzo.scale.set (10,10,10);
+		scene.add(object2);
+	}),
+
+	// called when loading is in progresses
+	function ( xhr ) {
+
+		console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+
+	},
+	// called when loading has errors
+	function ( error ) {
+
+		console.log( 'An error happened' );
+
+	}
+);
+
+			const meshbumpmap = new THREE.TextureLoader().load('elev_bump_4k.jpeg');
+			const loadis = new THREE.TextureLoader().load( 'earth.jpg');
+			const material = new THREE.MeshPhongMaterial({
+			map:loadis,
+			bumpMap : meshbumpmap});
+				const geometry = new THREE.SphereGeometry(1, 256, 256);
+			let earthMesh = new THREE.Mesh(geometry, material);
+			earthMesh.name= 'itsEarth';
+    		earthMesh.position.x = -4;
+   			 earthMesh.position.y = 3;
+   			 earthMesh.position.z = 0;
+   			 earthMesh.rotation.x = 0.1;
+   			 earthMesh.receiveShadow = true;
+    		earthMesh.castShadow = true; 
+    		scene.add( earthMesh );
+
+			const directionallight = new THREE.DirectionalLight(0xffffff, 1);
+			directionallight.position.set(0,50,3);
+			directionallight.target.position .set (0,0,0);
+
+			const ambientlight = new THREE.AmbientLight( 0xe5fafa, 0.8);
+ 
+		
+			scene.add(directionallight, ambientlight);
+			let theta = 0;
+			const dtheta = 2 * Math.PI / 400;
+			
+			//const group = new THREE.Group();
+			//group.add(stephan,henzo);
+			//scene.add(group);
+	
+			var clock = new THREE.Clock();
+			
+
+			function animate () {
+				requestAnimationFrame( animate );
+			
+				renderer.render( scene, camera );
+				earthMesh.rotation.x += 0.01;
+				earthMesh.rotation.y += 0.01;
+				
+
+				theta += dtheta;
+				const trigs =
+				{x: Math.cos(theta*1.05), y: Math.sin(theta*1.05), z: Math.cos(theta*1.05), r: 7};
+				const trig2 = 
+				{x: Math.cos(theta*1.25), y: Math.cos(theta*1.25), z: Math.sin(theta*1.25), r: 6};
+				directionallight.position.x =  trigs['r'] * trigs['x'];
+				directionallight.position.y =  trigs['r'] * trigs['y'];
+				directionallight.position.z =  trigs['r'] * trigs['z'];
+				earthMesh.position.x =  trig2['r'] * trig2['x'];
+   				earthMesh.position.y =  trig2['r'] * trig2['y'];
+   				earthMesh.position.z =  trig2['r'] * trig2['z'];
+			let t = clock.getElapsedTime;
+
+				   if( stephan ){
+				stephan.rotation.y += 0.001;
+				stephan.rotation.x += 0.0002;
+		}
+				if (henzo) {
+				henzo.rotation.y += 0.0004;
+				henzo.rotation.x += 0.002 ;}
+				
+		const mouse = {
+				x: undefined,
+				y: undefined
+			}
+
+			
+
+			addEventListener ('mouseclick', () => {
+				mouse.x=(event.clientX/innerWidth)
+				*2-1
+				mouse.y = - (event.clientY/innerHeight)
+				* 2 + 1
+				console.log(mouse)
+			})
+					
+		
+			
+
+			
+
+				controls.update();
+
+
+			};
+
+			animate();
+	</script>
+</body>
+</html>
