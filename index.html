@@ -95,7 +95,7 @@
     const material = new THREE.MeshStandardMaterial({
         color: 0xffffff,
         emissive: 0xffffff,
-        emissiveIntensity: 80,
+        emissiveIntensity: 40,
     });
     const star = new THREE.Mesh(geometry, material);
     const [x, y, z] = Array(3)
@@ -175,7 +175,7 @@ loader.load(
 			directionallight.position.set(0,50,3);
 			directionallight.target.position .set (0,0,0);
 
-			const ambientlight = new THREE.AmbientLight( 0xe5fafa, 0.8);
+			const ambientlight = new THREE.AmbientLight( 0xe5fafa, 0.4);
  
 		
 			scene.add(directionallight, ambientlight);
