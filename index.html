@@ -7,25 +7,22 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="/style.css">
+		<script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
 		</head>
 <body>
 	<div class="container">
 		<div class="buttons">
-			<a href="http://www.henryandstephan.com" class="btn-1">Do not press</a></div>
+			<h1><a href="http://www.henryandstephan.com" class="btn-1">Do not press</a></h1></div>
+			
+			
+			
 	</div>
+	<div id="title">Welcome to our universe</div>
 
-	<footer class="taskbar">
 	
-	  
-
-	  <div class="row" style="margin-right: 0px;">
-		<div class="col-8">
-			<a href="https://www.henryandstephan.com" class="btn start-button"><img src="/users-1.png" class="icon-16">Portfolio</a>
-			<a href="https://www.henryandstephan.com" class="btn start-button"><img src="/directory_folder_options-5.png" class="icon-16"> Email</a>
-		</div>
-	
-	</div>
-</footer>
 	<script type="module">
 			import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
 			import {OrbitControls} from 'https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js';
@@ -95,7 +92,7 @@
     const material = new THREE.MeshStandardMaterial({
         color: 0xffffff,
         emissive: 0xffffff,
-        emissiveIntensity: 40,
+        emissiveIntensity: 80,
     });
     const star = new THREE.Mesh(geometry, material);
     const [x, y, z] = Array(3)
@@ -155,6 +152,8 @@ loader.load(
 	}
 );
 
+
+
 			const meshbumpmap = new THREE.TextureLoader().load('elev_bump_4k.jpeg');
 			const loadis = new THREE.TextureLoader().load( 'earth.jpg');
 			const material = new THREE.MeshPhongMaterial({
@@ -175,7 +174,7 @@ loader.load(
 			directionallight.position.set(0,50,3);
 			directionallight.target.position .set (0,0,0);
 
-			const ambientlight = new THREE.AmbientLight( 0xe5fafa, 0.4);
+			const ambientlight = new THREE.AmbientLight( 0xe5fafa, 0.8);
  
 		
 			scene.add(directionallight, ambientlight);
@@ -243,7 +242,13 @@ loader.load(
 
 			};
 
+
 			animate();
 	</script>
+	<script>$(document).ready(function() {
+		$ ("#title").click(function(){
+			$("#title").hide();
+		})
+	}) </script>
 </body>
 </html>
