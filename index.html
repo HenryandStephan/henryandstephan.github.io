@@ -11,17 +11,19 @@
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
+  <div class="btext" id="btext"><h2> Access Accepted...Welcome!!!<span class="typed"></span></h2> </div>
+  <div id="typed-strings">
+	<p>Explore our test website.</p>
+	<p>Left Click to move</p>
+	<p>Oh and do not press the Do not press button</p>
+  </div>
+  <span id="typed"></span>
+
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
 		</head>
 <body>
-	<div class="container">
-		<div class="buttons">
-			<h1><a href="http://www.henryandstephan.com" class="btn-1">Do not press</a></h1></div>
-			
-			
-			
-	</div>
-	<div id="title">Welcome to our universe</div>
-
+	
 	
 	<script type="module">
 			import * as THREE from 'https://cdn.skypack.dev/three@0.129.0/build/three.module.js';
@@ -245,10 +247,46 @@ loader.load(
 
 			animate();
 	</script>
-	<script>$(document).ready(function() {
-		$ ("#title").click(function(){
-			$("#title").hide();
-		})
-	}) </script>
+
+
+	<script> var typed6 = new Typed('.typed', {
+		strings: ['installing telekinisis link...^1000\n `` ^1000\n`collecting brushes...` ^1000\n`assigning jaffa cakes...` ^1000\n `Last minute additions...`'],
+		typeSpeed: 80,
+		backSpeed: 0,
+		loop: false,
+	  });
+	</script>
+		<script>$(document).ready(function() {
+			
+			$("#title").delay(12000).fadeIn(500);
+			$ ("#title").click(function(){
+				$("#title").hide();
+				$("#btext").hide();
+				$("#typed-strings").fadeIn();
+				
+				
+				
+
+			})
+			
+
+			<script>$()
+		}) </script>
+		<script>
+  var typed = new Typed('#typed', {
+    stringsElement: '#typed-strings'
+  });
+</script>
+
+		<div class="container">
+		<div class="buttons">
+			<h1><a href="http://www.henryandstephan.com" class="btn-1">Do not press</a></h1></div>		
+	</div>
+	<div id="title">Welcome to our universe</div>
+	
+	<div id ="introt" class="intro"><h2>Welcome to our <span class="tutorial"></span></h2></div>
+
+
+		
 </body>
 </html>
